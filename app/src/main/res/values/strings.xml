@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">EdvoraApp</string>
+    <string name="tool_bar_title">Edvora</string>
+    <string name="filters">Filters</string>
+    <string name="clear_filter">Clear Filter</string>
+    <string name="no_products_found">No Products Found</string>
+    <string name="product_price">$ %s</string>
 </resources>

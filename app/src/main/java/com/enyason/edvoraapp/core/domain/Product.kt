@@ -15,3 +15,8 @@ data class Address(
     val city: String,
     val state: String
 )
+
+data class Category(
+    val name: String,
+    val products: List<ProductInformation>
+)
