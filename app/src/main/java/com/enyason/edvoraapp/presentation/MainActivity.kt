@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel.getProducts()
         binding.composeView.setContent { MainScreen(viewModel) }
     }
 }

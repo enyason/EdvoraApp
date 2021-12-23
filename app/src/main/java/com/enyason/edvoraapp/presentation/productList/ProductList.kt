@@ -339,15 +339,23 @@ fun FilterDialog(onDismissRequest: () -> Unit) {
             modifier = Modifier
                 .width(228.dp)
                 .height(282.dp)
+                .clip(RoundedCornerShape(15.dp))
+                .background(color = colorResource(id = R.color.black131313))
         ) {
             Text(
                 text = stringResource(id = R.string.filters),
                 color = Color.White.copy(alpha = 0.6f),
-                fontSize = 20.sp
+                fontSize = 20.sp,
+                modifier = Modifier.padding(start = 28.dp, top = 30.dp)
             )
 
             Divider(
-                modifier = Modifier.padding(top = 12.dp),
+                modifier = Modifier.padding(
+                    top = 12.dp,
+                    start = 28.dp,
+                    end = 42.dp,
+                    bottom = 36.dp
+                ),
                 color = colorResource(id = R.color.grayCBCBCB)
             )
 
@@ -369,10 +377,10 @@ fun FilterDialog(onDismissRequest: () -> Unit) {
 fun FilterItem(text: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
-            .width(168.dp)
+            .fillMaxWidth()
             .height(38.dp)
+            .padding(start = 24.dp, bottom = 12.dp, end = 36.dp)
             .background(color = colorResource(id = R.color.black232323))
-            .padding(start = 30.dp)
             .clip(RoundedCornerShape(5.dp))
             .clickable(onClick = onClick)
     ) {

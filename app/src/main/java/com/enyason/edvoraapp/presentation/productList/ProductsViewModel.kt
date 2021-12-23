@@ -7,12 +7,13 @@ import com.enyason.edvoraapp.core.domain.usecase.GetProducts
 import com.enyason.edvoraapp.core.domain.ProductInformation
 import com.enyason.edvoraapp.common.extensions.asLiveData
 import com.enyason.edvoraapp.core.domain.Category
-import kotlinx.coroutines.Dispatchers
+import com.enyason.edvoraapp.presentation.utils.Dispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ProductsViewModel constructor(
-    private val getProducts: GetProducts
+    private val getProducts: GetProducts,
+    private val dispatcher: Dispatcher
 ) : ViewModel() {
 
     private val _viewState = MutableLiveData<ViewState>()
@@ -21,13 +22,9 @@ class ProductsViewModel constructor(
     private val _loading = MutableLiveData<Boolean>()
     val loading = _loading.asLiveData()
 
-    init {
-        getProducts()
-    }
-
-    private fun getProducts() {
+    fun getProducts() {
         _loading.value = true
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher.io) {
 
             val viewState = when (val response = getProducts.execute()) {
                 is GetProducts.Result.Success -> {
@@ -37,7 +34,7 @@ class ProductsViewModel constructor(
                 GetProducts.Result.Error -> ViewState.Error
             }
 
-            withContext(Dispatchers.Main) {
+            withContext(dispatcher.main) {
                 _viewState.value = viewState
                 _loading.value = false
             }
